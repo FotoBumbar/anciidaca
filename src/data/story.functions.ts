@@ -35,17 +35,15 @@ export const writeStory = createServerFn({ method: 'POST' })
     const schema = await import('../../db/schema')
     const { eq } = await import('drizzle-orm')
     const tables = { memories: schema.memories, comments: schema.comments, albums: schema.albums, drafts: schema.bookChapters, stageSettings: schema.stages }
-    await db.transaction(async (tx) => {
-      for (const item of data.changes) {
-        const table = tables[item.collection]
-        if (item.value === null) {
-          if (!data.importing) await tx.delete(table).where(eq(table.id, item.id))
-        } else if (data.importing) {
-          await tx.insert(table).values({ id: item.id, value: item.value }).onConflictDoNothing()
-        } else {
-          await tx.insert(table).values({ id: item.id, value: item.value }).onConflictDoUpdate({ target: table.id, set: { value: item.value } })
-        }
+    for (const item of data.changes) {
+      const table = tables[item.collection]
+      if (item.value === null) {
+        if (!data.importing) await db.delete(table).where(eq(table.id, item.id))
+      } else if (data.importing) {
+        await db.insert(table).values({ id: item.id, value: item.value }).onConflictDoNothing()
+      } else {
+        await db.insert(table).values({ id: item.id, value: item.value }).onConflictDoUpdate({ target: table.id, set: { value: item.value } })
       }
-    })
+    }
     return { saved: true }
   })
