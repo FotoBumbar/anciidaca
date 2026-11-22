@@ -11,7 +11,7 @@ import {
   YOUTUBE_ID,
   type DriveItem,
 } from '@/data/photos'
-import { BOOK_COVER, quotes } from '@/data/book'
+import { quotes } from '@/data/book'
 import { useStore } from '@/data/store'
 
 export const Route = createFileRoute('/')({
@@ -259,9 +259,11 @@ function HomeContent() {
           className="mx-auto block w-64 rotate-[-3deg] transition hover:rotate-0 hover:scale-105 md:w-full"
         >
           <img
-            src={BOOK_COVER}
+            src="/img/korice.jpg"
             alt="Knjiga bez tačke — korice"
-            className="w-full rounded-md shadow-[0_30px_60px_rgba(125,83,78,0.15)]"
+            loading="eager"
+            decoding="async"
+            className="block h-auto w-full rounded-md object-contain shadow-[0_30px_60px_rgba(125,83,78,0.15)]"
           />
         </Link>
 
