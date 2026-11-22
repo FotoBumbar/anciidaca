@@ -7,16 +7,10 @@ const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     tailwindcss(),
-    tanstackStart({
-      spa: {
-        enabled: true,
-        prerender: {
-          outputPath: '/index.html',
-        },
-      },
-    }),
+    tanstackStart(),
     viteReact(),
   ],
 })
 
 export default config
+
