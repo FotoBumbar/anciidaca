@@ -8,10 +8,13 @@ const config = defineConfig({
   plugins: [
     tailwindcss(),
     tanstackStart({
-      target: 'vercel',
+      spa: {
+        enabled: true,
+      },
     }),
     viteReact(),
   ],
 })
 
 export default config
+
