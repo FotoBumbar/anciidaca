@@ -11,7 +11,7 @@ import {
   YOUTUBE_ID,
   type DriveItem,
 } from '@/data/photos'
-import { quotes } from '@/data/book'
+import { BOOK_COVER, quotes } from '@/data/book'
 import { useStore } from '@/data/store'
 
 export const Route = createFileRoute('/')({
@@ -42,9 +42,7 @@ function useTogether() {
     }
 
     tick()
-
     const id = setInterval(tick, 1000)
-
     return () => clearInterval(id)
   }, [])
 
@@ -188,11 +186,9 @@ function HomeContent() {
             className="rounded-2xl border border-border bg-card/70 p-5 text-center"
           >
             <div className="text-3xl">{e}</div>
-
             <div className="mt-1 font-display text-3xl font-black">
               {n}
             </div>
-
             <div className="text-sm text-muted-foreground">{l}</div>
           </div>
         ))}
@@ -259,11 +255,9 @@ function HomeContent() {
           className="mx-auto block w-64 rotate-[-3deg] transition hover:rotate-0 hover:scale-105 md:w-full"
         >
           <img
-            src="/img/korice.jpg"
-            alt="Knjiga bez tačke — korice"
-            loading="eager"
-            decoding="async"
-            className="block h-auto w-full rounded-md object-contain shadow-[0_30px_60px_rgba(125,83,78,0.15)]"
+            src={BOOK_COVER}
+            alt="Originalne korice Knjige bez tačke"
+            className="mx-auto w-full rounded-md shadow-[0_18px_45px_#7d534e20]"
           />
         </Link>
 
